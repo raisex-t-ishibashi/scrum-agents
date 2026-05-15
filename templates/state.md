@@ -13,7 +13,7 @@
 ## 📋 How to Resume (ビジネスオーナー向け)
 中断後に再開するときは、新セッションで以下を言うだけ:
 
-> `docs/state.md` を読んで、続きから再開して
+> `artifact/state.md` を読んで、続きから再開して
 
 Main Claude が現在の Owner と Next Action を読み取り、適切なエージェントにルーティングします。
 
@@ -31,7 +31,7 @@ Main Claude が現在の Owner と Next Action を読み取り、適切なエー
 | `PROJECT_REPO_KEY_3` | `PROJECT_REPO_PATH_3/` | PROJECT_REPO_DESC_3 |
 
 **起動ディレクトリ:** `PROJECT_ROOT/`
-**共有ドキュメント:** `PROJECT_DOCS_REPO/` に git 管理 (詳細は `docs/GIT-PROTOCOL.md`)
+**共有ドキュメント:** `PROJECT_DOCS_REPO/` に git 管理 (詳細は `artifact/GIT-PROTOCOL.md`)
 
 ---
 

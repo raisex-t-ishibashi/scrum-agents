@@ -1,6 +1,6 @@
 # State Management Protocol
 
-このプロジェクトでは `docs/state.md` を**唯一の真実の源泉(Single Source of Truth)**として扱います。このプロトコルにより、使用量制限や時間経過で中断が発生しても、新しいセッションが**正確に前回の続きから再開**できることを保証します。
+このプロジェクトでは `artifact/state.md` を**唯一の真実の源泉(Single Source of Truth)**として扱います。このプロトコルにより、使用量制限や時間経過で中断が発生しても、新しいセッションが**正確に前回の続きから再開**できることを保証します。
 
 ## なぜ必要か
 1. **サブエージェントはステートレス**: 各呼び出しでコンテキストがリセットされる
@@ -11,7 +11,7 @@
 
 ### 1️⃣ 作業開始時: State を読む
 
-全エージェントは、呼び出されたら**最初に必ず** `docs/state.md` を読む。
+全エージェントは、呼び出されたら**最初に必ず** `artifact/state.md` を読む。
 
 確認すべき項目:
 - 対象ストーリーの **Status** と **Stage**
@@ -27,7 +27,7 @@
 
 ### 2️⃣ 作業中: Checkpoint を頻繁に更新
 
-**長時間かかる作業では、区切り目ごとに** `docs/state.md` の Current Checkpoint を更新する。
+**長時間かかる作業では、区切り目ごとに** `artifact/state.md` の Current Checkpoint を更新する。
 
 更新タイミングの目安:
 - サブタスクを1つ完了したとき (必須)
@@ -44,7 +44,7 @@
 - **What remains:** メールアドレス形式チェック、重複チェック、エラーメッセージ
 - **Files touched (uncommitted/WIP):** src/services/auth.ts
 - **Next concrete step:** src/services/auth.ts:47 の validateEmail() から続きを書く
-- **References:** docs/design/us-001.md, docs/analysis/us-001.md
+- **References:** artifact/design/us-001.md, artifact/analysis/us-001.md
 ```
 
 **コードは書きかけでもファイル保存する**。`// TODO(resume): ...` コメントで中断位置を明示すると親切。
@@ -69,11 +69,11 @@
 
 **ビジネスオーナー側:**
 ```
-docs/state.md を読んで、続きから再開して
+artifact/state.md を読んで、続きから再開して
 ```
 
 **Main Claude 側 (暗黙):**
-1. `docs/state.md` を読む
+1. `artifact/state.md` を読む
 2. Active Stories を確認
 3. Current Owner のロールを特定
 4. そのエージェントを呼び出す
@@ -104,7 +104,7 @@ docs/state.md を読んで、続きから再開して
 **目安: 各サブタスクは 15〜30分程度で完了できる粒度に分解**。これより大きいと中断に弱く、細かすぎると管理コストが高い。
 
 ### サブタスク分解はエージェントの責務
-着手時に「自分の担当の T を細分化する」ところから始める。分解結果は `docs/state.md` に反映。
+着手時に「自分の担当の T を細分化する」ところから始める。分解結果は `artifact/state.md` に反映。
 
 ---
 
@@ -125,8 +125,8 @@ docs/state.md を読んで、続きから再開して
 | やりたいこと | 言うこと |
 |-------------|---------|
 | 新しいアイデアを投入 | `po を呼んで、このアイデアをバックログに: [内容]` |
-| 全体状況を確認 | `docs/state.md を読んで、現状を日本語でサマリーして` |
-| 中断後に再開 | `docs/state.md を読んで、続きから再開して` |
+| 全体状況を確認 | `artifact/state.md を読んで、現状を日本語でサマリーして` |
+| 中断後に再開 | `artifact/state.md を読んで、続きから再開して` |
 | 特定ストーリーだけ進める | `US-001 を次の段階まで進めて` |
 | 強制的にQAに回す | `qa を呼んで US-001 を検証して` |
 | スプリント状況確認 | `sm を呼んで、現状のスプリント状況を報告して` |
@@ -138,7 +138,7 @@ docs/state.md を読んで、続きから再開して
 長期プロジェクトでは SM に以下を依頼すると安心:
 
 ```
-sm を呼んで、docs/state.md の整合性をチェックして
+sm を呼んで、artifact/state.md の整合性をチェックして
 ```
 
 SM は以下をチェック:

@@ -54,7 +54,7 @@ cd /path/to/your-project
 bash /path/to/scrum-agents/init-project.sh
 ```
 
-対話形式でリポジトリ構成を入力すると、プロジェクト固有の `docs/` が生成されます。
+対話形式でリポジトリ構成を入力すると、プロジェクト固有の `artifact/` が生成されます。
 
 ```
 ━━━  スクラムチーム プロジェクト初期化  ━━━
@@ -74,7 +74,7 @@ bash /path/to/scrum-agents/init-project.sh
   用途: フロントエンド
 
 ━━━  完了 🎉  ━━━
-生成: docs/state.md / docs/GIT-PROTOCOL.md / docs/STATE-PROTOCOL.md
+生成: artifact/state.md / artifact/GIT-PROTOCOL.md / artifact/STATE-PROTOCOL.md
 ```
 
 ---
@@ -116,7 +116,7 @@ sm を呼んで、現状のバックログから Sprint 1 を計画して
 中断後に新セッションを開いたら:
 
 ```
-docs/state.md を読んで、続きから再開して
+artifact/state.md を読んで、続きから再開して
 ```
 
 `state.md` にサブタスク単位の進捗とチェックポイントが記録されているため、どこまで進んだかを自動で把握して再開します。
@@ -140,18 +140,23 @@ docs/state.md を読んで、続きから再開して
 
 ```
 your-project/
-├── docs/                  ← init-project.sh が生成
-│   ├── state.md           🔥 中断・再開の命綱
+├── artifact/              ← git repo (init-project.sh が git init)
+│   ├── .gitignore         ← state.md を除外
+│   ├── state.md           🔥 中断・再開の命綱 (git管理外)
 │   ├── STATE-PROTOCOL.md
 │   ├── GIT-PROTOCOL.md
 │   ├── vision.md          PO が作成
 │   ├── backlog.md         PO が作成
 │   ├── roadmap.md         PO が作成
 │   ├── sprints/           SM が作成
-│   ├── analysis/          Analyst が作成
-│   ├── design/            Engineer が作成
-│   ├── design-ux/         Designer が作成
-│   └── qa/                QA が作成
+│   │   └── sprint-1.md
+│   ├── US-001/            ストーリーごとにフォルダ
+│   │   ├── analysis.md    Analyst が作成
+│   │   ├── design-ux.md   Designer が作成
+│   │   ├── design-tech.md Engineer が作成
+│   │   └── qa.md          QA が作成
+│   └── US-002/
+│       └── ...
 ├── your-backend/          git repo
 ├── your-front/            git repo
 └── your-infra/            git repo
@@ -162,7 +167,7 @@ your-project/
 ## Git 運用
 
 全エージェントはサブタスク完了ごとに自律的に commit します。  
-詳細は各プロジェクトの `docs/GIT-PROTOCOL.md` を参照。
+詳細は各プロジェクトの `artifact/GIT-PROTOCOL.md` を参照。
 
 **メッセージ形式 (Conventional Commits):**
 
@@ -194,6 +199,6 @@ docs(US-001): ドメインモデル分析を追加
 |------|------|
 | エージェントが呼ばれない | `description` 先頭の "MUST BE USED when..." を具体化する |
 | 変更が反映されない | Claude Code セッションを再起動 |
-| state.md が古い/矛盾 | `sm を呼んで docs/state.md の整合性をチェックして` |
+| state.md が古い/矛盾 | `sm を呼んで artifact/state.md の整合性をチェックして` |
 | git commit されなかった | `git status` で確認後、担当エージェントを再呼び出して Exit Ritual を完了させる |
 | `fatal: not a git repository` | 各リポジトリに `cd` してから git 操作する (マルチリポ構成の場合) |
